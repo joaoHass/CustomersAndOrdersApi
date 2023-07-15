@@ -30,7 +30,7 @@ namespace Presentation
 
         [HttpPost]
         [Route("")]
-        public IActionResult NewCostumer([FromBody] string temporaryParameter)
+        public IActionResult CreateNewCustomer([FromBody] string temporaryParameter)
         {
             return Ok("Not Implemented");
         }
