@@ -19,8 +19,8 @@ namespace Domain.Customers
         /// <param name="cpf"></param>
         /// <exception cref="ArgumentException">The informed CPF number has length different than 14, which is invalid</exception>
         /// <exception cref="ArgumentException">The CPF can only contain numbers</exception>
-        public string CPF 
-        { 
+        public string CPF
+        {
             get => _cpf;
             set
             {

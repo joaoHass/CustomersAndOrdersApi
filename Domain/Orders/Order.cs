@@ -1,4 +1,4 @@
-﻿namespace Domain.Order
+﻿namespace Domain.Orders
 {
     public class Order
     {
