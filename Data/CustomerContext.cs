@@ -13,9 +13,22 @@ namespace Data
             optionsBuilder.UseNpgsql(@"Host=localhost;Database=customers_and_orders;Username=customers&orders_app;Password=customers");
         }
 
-        public void Add(Customer customer) => Customers.Add(customer);
+        public void Add(Customer customer) {
+            Customers.Add(customer);
+            SaveChanges();
+        }
 
-        public void Delete(Customer entity) => Customers.Remove(entity);
+        public void Delete(Customer entity)
+        {
+            Customers.Remove(entity);
+            SaveChanges();
+        }
+
+        public void Update(Customer entity)
+        {
+            Customers.Update(entity);
+            SaveChanges();
+        }
 
         public void Update(Customer entity) => Customers.Update(entity);
     }
