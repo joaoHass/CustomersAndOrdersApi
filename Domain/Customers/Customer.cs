@@ -24,7 +24,7 @@ namespace Domain.Customers
             get => _cpf;
             set
             {
-                if (value.Length != 14)
+                if (value.Length != 11)
                     throw new ArgumentException("The informed CPF number has length different than 14, which is invalid");
 
                 if (!value.All(char.IsDigit))
