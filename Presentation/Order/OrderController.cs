@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Domain.Order;
+using Domain.Orders;
 
 namespace Presentation
 {

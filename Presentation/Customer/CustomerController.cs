@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Domain.Customer;
+using Domain.Customers;
 
 namespace Presentation
 {
