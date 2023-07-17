@@ -1,10 +1,9 @@
 ﻿using Domain.Customers;
-using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data
 {
-    public class CustomerContext : DbContext, IRepository<Customer>
+    public class CustomerContext : DbContext, ICustomerRepository
     {
         public DbSet<Customer> Customers { get; set; }
 
@@ -30,6 +29,6 @@ namespace Data
             SaveChanges();
         }
 
-        public void Update(Customer entity) => Customers.Update(entity);
+        public ICollection<Customer> GetCustomers() => Customers.AsNoTracking().ToList();
     }
 }
