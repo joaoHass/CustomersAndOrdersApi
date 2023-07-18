@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Domain.Customers;
+using Domain.Interfaces;
 
 namespace Presentation
 {
@@ -8,10 +9,11 @@ namespace Presentation
     public class CustomerController : ControllerBase
     {
         private readonly ILogger<CustomerController> _logger;
+        private readonly ICustomerRepository _repository;
 
-        public CustomerController(ILogger<CustomerController> logger)
+        public CustomerController(ICustomerRepository repository)
         {
-            _logger = logger;
+            _repository = repository;
         }
 
         [HttpGet]
