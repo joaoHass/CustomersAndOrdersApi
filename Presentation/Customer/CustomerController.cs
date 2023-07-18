@@ -20,14 +20,8 @@ namespace Presentation
         [Route("")]
         public ActionResult<IEnumerable<Customer>> GetCustomers()
         {
-            Customer c1 = new Customer();
-            c1.Name = "John";
-            c1.Id = 1;
-            Customer c2 = new Customer();
-            c2.Name = "Doe";
-            c2.Id = 2;
 
-            return Ok(new Customer[] { c1, c2 }) ;
+            return Ok(_repository.GetCustomers());
         }
 
         [HttpPost]
