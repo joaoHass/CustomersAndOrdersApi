@@ -26,9 +26,16 @@ namespace Presentation
 
         [HttpPost]
         [Route("")]
-        public IActionResult CreateNewCustomer([FromBody] string temporaryParameter)
+        public IActionResult CreateNewCustomer([FromBody] CustomerCreateDto customerCreateDto)
         {
-            return Ok("Not Implemented");
+            Customer c1 = new Customer();
+            c1.Name = customerCreateDto.Name;
+            c1.CPF = customerCreateDto.CPF;
+            c1.Adress = customerCreateDto.Address;
+
+            _repository.Add(c1);
+
+            return Ok($"Customer with Id {c1.Id} was created");
         }
 
         [HttpDelete]
