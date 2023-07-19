@@ -35,9 +35,9 @@ namespace Domain.Customers
             }
         }
 
-        public string Adress { get; set; }
-        public int PhoneNumber { get; set; } // I won't be adding verification to phone number to keep things simple.
-        public DateTime BirthDate { get; set; }
-        public virtual ICollection<Order> Orders { get; set; }
+        public string? Adress { get; set; }
+        public int? PhoneNumber { get; set; } // I won't be adding verification to phone number to keep things simple.
+        public DateTime? BirthDate { get; set; }
+        public virtual ICollection<Order>? Orders { get; set; }
     }
 }
