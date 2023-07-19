@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddScoped<ICustomerRepository, CustomerContext>();
+builder.Services.AddDbContext<ApplicationContext>();
+
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 
 builder.Services.AddControllers(config => config.Filters.Add(new ProducesAttribute("application/json")));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
