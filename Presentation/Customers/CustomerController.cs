@@ -26,6 +26,7 @@ namespace Presentation
 
         [HttpPost]
         [Route("")]
+        [Consumes(MediaTypeNames.Application.Json)]
         public IActionResult CreateNewCustomer([FromBody] CustomerCreateDto customerCreateDto)
         {
             Customer c1 = new Customer();
