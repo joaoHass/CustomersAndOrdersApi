@@ -18,9 +18,19 @@ namespace Data
             _context.SaveChanges();
         }
 
-        public void Delete(Customer entity)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public void Delete(int id)
         {
-            _context.Customers.Remove(entity);
+            Customer? customerToDelete = _context.Customers.Find(id);
+
+            if (customerToDelete is null)
+                throw new ArgumentNullException($"A customer with the id {id} was not found.");
+
+            _context.Customers.Remove(customerToDelete);
             _context.SaveChanges();
         }
 
