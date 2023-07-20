@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Domain.Customers;
-using Domain.Interfaces;
+using Presentation.Customers.Dtos;
+using System.Net.Mime;
 
 namespace Presentation
 {
@@ -20,7 +21,6 @@ namespace Presentation
         [Route("")]
         public ActionResult<IEnumerable<Customer>> GetCustomers()
         {
-
             return Ok(_repository.GetCustomers());
         }
 
