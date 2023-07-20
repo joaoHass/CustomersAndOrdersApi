@@ -14,4 +14,4 @@ Things I'll follow/implement are:
 
 I don't plan for now making this project complex (i.e adding a lot of classes, etc), as the purpose of it is to practice more broader and abstract themes (i.e software architecture).
 
-I'll be sharing the things I'm doing on a Trello board.
+Trello board to know what's going on/what's planned: https://trello.com/b/dflvJyB7/customers-and-orders
