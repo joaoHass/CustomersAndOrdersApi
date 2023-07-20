@@ -40,9 +40,20 @@ namespace Presentation
 
         [HttpDelete]
         [Route("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult DeleteCostumer(int id)
         {
-            return Ok("Not implemented");
+            try
+            {
+                _repository.Delete(id);
+            }
+            catch (ArgumentNullException)
+            {
+                return NotFound($"The customer with Id {id} was not found.");
+            }
+
+            return Ok($"Customer with Id {id} was deleted succesfully.");
         }
     }
 }
