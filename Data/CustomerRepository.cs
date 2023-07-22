@@ -1,9 +1,10 @@
 ﻿using Domain.Customers;
+using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data
 {
-    public class CustomerRepository : ICustomerRepository
+    public class CustomerRepository : IRepository<Customer>
     {
         private readonly ApplicationContext _context;
 
@@ -40,6 +41,8 @@ namespace Data
             _context.SaveChanges();
         }
 
-        public ICollection<Customer> GetCustomers() => _context.Customers.AsNoTracking().ToList();
+        public ICollection<Customer> GetAll() => _context.Customers.AsNoTracking().ToList();
+
+        public Customer? Get(int id) => _context.Customers.Find(id);
     }
 }
