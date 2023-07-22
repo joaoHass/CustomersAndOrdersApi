@@ -1,13 +1,16 @@
 using Data;
 using Domain.Customers;
+using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Presentation.Customers.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<ApplicationContext>();
 
-builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IRepository<Customer>, CustomerRepository>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
 
 builder.Services.AddControllers(config => config.Filters.Add(new ProducesAttribute("application/json")));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
