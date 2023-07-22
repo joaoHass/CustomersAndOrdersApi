@@ -3,7 +3,7 @@ using Domain.Interfaces;
 
 namespace Presentation.Customers.Service
 {
-    public interface ICustomerService : IRepository<Customer>
-    {
+    public interface ICustomerService 
+    { 
     }
 }
