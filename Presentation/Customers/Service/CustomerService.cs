@@ -6,11 +6,11 @@ namespace Presentation.Customers.Service
 {
     public class CustomerService : ICustomerService
     {
-        private readonly IRepository<Customer> _customerRepository;
+        private readonly IRepository<Customer> _repository;
 
         public CustomerService(IRepository<Customer> customerRepository)
         {
-            _customerRepository = customerRepository;
+            _repository = customerRepository;
         }
 
         public void Add(Customer entity)
