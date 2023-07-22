@@ -1,6 +1,7 @@
 ﻿
 using Domain.Customers;
 using Domain.Interfaces;
+using Presentation.Customers.Dtos;
 
 namespace Presentation.Customers.Service
 {
@@ -13,9 +14,21 @@ namespace Presentation.Customers.Service
             _repository = customerRepository;
         }
 
-        public void Add(Customer entity)
+        public void Add(CustomerCreateDto entity)
         {
-            throw new NotImplementedException();
+            if (entity == null) throw new ArgumentNullException();
+
+            Customer newCustomer = new()
+            {
+                Name = entity.Name,
+                CPF = entity.CPF,
+                Adress = entity.Address,
+                PhoneNumber = entity.PhoneNumber,
+                BirthDate = entity.BirthDate,
+                Orders = entity.Orders
+            };
+
+            _repository.Add(newCustomer);
         }
 
         public void Delete(int id)
