@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Domain.Customers;
 using Presentation.Customers.Dtos;
 using System.Net.Mime;
+using Presentation.Customers.Service;
 
 namespace Presentation
 {
@@ -10,18 +11,18 @@ namespace Presentation
     public class CustomerController : ControllerBase
     {
         private readonly ILogger<CustomerController> _logger;
-        private readonly ICustomerRepository _repository;
+        private readonly ICustomerService _service;
 
-        public CustomerController(ICustomerRepository repository)
+        public CustomerController(ICustomerService service)
         {
-            _repository = repository;
+            _service = service;
         }
 
         [HttpGet]
         [Route("")]
         public ActionResult<IEnumerable<Customer>> GetCustomers()
         {
-            return Ok(_repository.GetCustomers());
+            return Ok(_service.GetAll());
         }
 
         [HttpPost]
@@ -29,14 +30,9 @@ namespace Presentation
         [Consumes(MediaTypeNames.Application.Json)]
         public IActionResult CreateNewCustomer([FromBody] CustomerCreateDto customerCreateDto)
         {
-            Customer c1 = new Customer();
-            c1.Name = customerCreateDto.Name;
-            c1.CPF = customerCreateDto.CPF;
-            c1.Adress = customerCreateDto.Address;
+            _service.Add(customerCreateDto);
 
-            _repository.Add(c1);
-
-            return Ok($"Customer with Id {c1.Id} was created");
+            return Ok($"Customer was created successfully");
         }
 
         [HttpDelete]
@@ -47,7 +43,7 @@ namespace Presentation
         {
             try
             {
-                _repository.Delete(id);
+                _service.Delete(id);
             }
             catch (ArgumentNullException)
             {
