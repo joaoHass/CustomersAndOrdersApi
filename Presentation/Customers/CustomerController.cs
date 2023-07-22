@@ -30,7 +30,14 @@ namespace Presentation
         [Consumes(MediaTypeNames.Application.Json)]
         public IActionResult CreateNewCustomer([FromBody] CustomerCreateDto customerCreateDto)
         {
-            _service.Add(customerCreateDto);
+            try
+            {
+                _service.Add(customerCreateDto);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
             return Ok($"Customer was created successfully");
         }
