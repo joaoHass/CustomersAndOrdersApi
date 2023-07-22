@@ -8,6 +8,7 @@ namespace Domain.Interfaces
 {
     public interface IRepository<T> where T : class
     {
+        T? Get(int id);
         ICollection<T> GetAll();
         void Add(T entity);
         void Update(T entity);
