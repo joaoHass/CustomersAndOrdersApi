@@ -43,7 +43,7 @@ namespace Presentation.Customers.Service
 
         public ICollection<Customer> GetAll()
         {
-            throw new NotImplementedException();
+            return _repository.GetAll();
         }
 
         public void Update(Customer entity)
