@@ -33,7 +33,7 @@ namespace Presentation.Customers.Service
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _repository.Delete(id);
         }
 
         public Customer? Get(int id)
