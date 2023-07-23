@@ -38,7 +38,7 @@ namespace Presentation.Customers.Service
 
         public Customer? Get(int id)
         {
-            throw new NotImplementedException();
+            return _repository.Get(id);
         }
 
         public ICollection<Customer> GetAll()
