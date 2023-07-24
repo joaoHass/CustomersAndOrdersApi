@@ -16,7 +16,13 @@ namespace Presentation.Customers.Service
         public void Delete(int id);
         public Customer? Get(int id);
         public ICollection<Customer> GetAll();
-        public void Update(Customer entity);
+
+        /// <summary>
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="dto"></param>
+        /// <exception cref="ArgumentNullException">Thrown if the passed id does not point to any Customer</exception>
+        public void Update(int id, CustomerUpdateDto dto);
 
     }
 }
