@@ -56,6 +56,29 @@ namespace Presentation
             return Ok($"Customer was created successfully");
         }
 
+        [HttpPatch]
+        [Route("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult UpdateCustomer(int id, [FromBody] CustomerUpdateDto customerUpdateDto)
+        {
+            try
+            {
+                _service.Update(id, customerUpdateDto);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok("The customer was updated succesfully.");
+        }
+
         [HttpDelete]
         [Route("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
