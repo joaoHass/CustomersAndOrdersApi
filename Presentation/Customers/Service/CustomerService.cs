@@ -46,9 +46,28 @@ namespace Presentation.Customers.Service
             return _repository.GetAll();
         }
 
-        public void Update(Customer entity)
+        public void Update(int id, CustomerUpdateDto dto)
         {
-            throw new NotImplementedException();
+            Customer? customerToUpdate = Get(id);
+
+            if (customerToUpdate == null) throw new ArgumentNullException($"A customer with the id {id} does not exist");
+
+            if (dto.Name != null)
+                customerToUpdate.Name = dto.Name;
+
+            if (dto.CPF != null)
+                customerToUpdate.CPF = dto.CPF;
+
+            if (dto.Address != null)
+                customerToUpdate.Adress = dto.Address;
+
+            if (dto.PhoneNumber != null)
+                customerToUpdate.PhoneNumber = dto.PhoneNumber;
+
+            if (dto.BirthDate != null)
+                customerToUpdate.BirthDate = dto.BirthDate;
+
+            _repository.Update(customerToUpdate);
         }
     }
 }
