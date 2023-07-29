@@ -39,5 +39,21 @@ namespace Domain.Customers
         public int? PhoneNumber { get; set; } // I won't be adding verification to phone number to keep things simple.
         public DateTime? BirthDate { get; set; }
         public virtual ICollection<Order>? Orders { get; set; }
+
+        private ICollection<string> ValidateCPF(string cpf, bool throwException = true)
+        {
+            ICollection<string> errors = new List<string>();
+
+            if (cpf.Length != 11)
+               errors.Add("The informed CPF number has length different than 14, which is invalid");
+
+            if (!cpf.All(char.IsDigit))
+                errors.Add("The CPF can only contain numbers");
+
+            if (errors.Count > 0 && throwException)
+                throw new ArgumentException(string.Join(Environment.NewLine, errors));
+
+            return errors;
+        }
     }
 }
