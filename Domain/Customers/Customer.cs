@@ -24,11 +24,7 @@ namespace Domain.Customers
             get => _cpf;
             set
             {
-                if (value.Length != 11)
-                    throw new ArgumentException("The informed CPF number has length different than 14, which is invalid");
-
-                if (!value.All(char.IsDigit))
-                    throw new ArgumentException("The CPF can only contain numbers");
+                ValidateCPF(value);
 
                 // I won't be checking if the CPF is valid or not, for simplicity.
                 _cpf = value;
@@ -51,7 +47,7 @@ namespace Domain.Customers
                 errors.Add("The CPF can only contain numbers");
 
             if (errors.Count > 0 && throwException)
-                throw new ArgumentException(string.Join(Environment.NewLine, errors));
+                throw new ArgumentException(string.Join(Environment.NwLine, errors));
 
             return errors;
         }
