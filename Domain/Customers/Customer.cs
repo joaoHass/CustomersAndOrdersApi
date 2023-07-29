@@ -47,7 +47,7 @@ namespace Domain.Customers
                 errors.Add("The CPF can only contain numbers");
 
             if (errors.Count > 0 && throwException)
-                throw new ArgumentException(string.Join(Environment.NwLine, errors));
+                throw new ArgumentException(string.Join(Environment.NewLine, errors));
 
             return errors;
         }
