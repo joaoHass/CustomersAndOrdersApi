@@ -3,6 +3,7 @@ using Domain.Customers;
 using Presentation.Customers.Dtos;
 using System.Net.Mime;
 using Presentation.Customers.Service;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Presentation
 {
@@ -18,6 +19,7 @@ namespace Presentation
             _service = service;
         }
 
+        [Authorize]
         [HttpGet]
         [Route("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Customer))]
@@ -32,6 +34,7 @@ namespace Presentation
             return Ok(customer);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("")]
         public ActionResult<IEnumerable<Customer>> GetCustomers()
@@ -39,6 +42,7 @@ namespace Presentation
             return Ok(_service.GetAll());
         }
 
+        [Authorize]
         [HttpPost]
         [Route("")]
         [Consumes(MediaTypeNames.Application.Json)]
@@ -56,6 +60,7 @@ namespace Presentation
             return Ok($"Customer was created successfully");
         }
 
+        [Authorize]
         [HttpPatch]
         [Route("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -79,6 +84,7 @@ namespace Presentation
             return Ok("The customer was updated succesfully.");
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
