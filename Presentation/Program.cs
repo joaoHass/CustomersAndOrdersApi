@@ -1,8 +1,13 @@
+using Application.Authentication;
 using Data;
 using Domain.Customers;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Customers.Service;
+using System.Reflection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,8 +16,30 @@ builder.Services.AddDbContext<ApplicationContext>();
 
 builder.Services.AddScoped<IRepository<Customer>, CustomerRepository>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddSingleton(builder.Configuration.GetSection("JwtAuth").Get<JwtAuth>());
+builder.Services.AddScoped<Authentication>();
 
 builder.Services.AddControllers(config => config.Filters.Add(new ProducesAttribute("application/json")));
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(o =>
+{
+    o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+        ValidIssuer = builder.Configuration["JwtAuth:Issuer"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtAuth:Key"])),
+        ValidateIssuer = true,
+        ValidateAudience = false,
+        ValidateLifetime = false,
+        ValidateIssuerSigningKey = true
+    };
+});
+builder.Services.AddAuthorization();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(o =>
@@ -21,7 +48,6 @@ builder.Services.AddSwaggerGen(o =>
     {
         Title = "Customers and Orders",
         Version = "v1",
-        Description = "An api that I'm developing for portfolio purposes",
         Contact = new Microsoft.OpenApi.Models.OpenApiContact()
         {
             Name = "João Hass",
@@ -29,6 +55,11 @@ builder.Services.AddSwaggerGen(o =>
             Url = new Uri("https://github.com/joaoHass"),
         }
     });
+
+    // Set the comments path for the Swagger JSON and UI.
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    o.IncludeXmlComments(xmlPath);
 });
 
 var app = builder.Build();
@@ -42,6 +73,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
