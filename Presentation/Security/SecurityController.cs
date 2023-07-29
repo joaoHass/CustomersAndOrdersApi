@@ -8,6 +8,8 @@ using Application.Authentication;
 
 namespace Presentation.Security
 {
+    [ApiController]
+    [Route("api/v1/security")]
     public class SecurityController : Controller
     {
         private readonly Authentication _auth;
