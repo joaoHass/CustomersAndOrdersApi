@@ -1,11 +1,8 @@
-﻿using Domain.Customers;
+﻿using Application.Authentication;
+using Domain.Customers;
 using Domain.Orders;
+using Domain.Users;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Data
 {
@@ -13,6 +10,8 @@ namespace Data
     {
         public DbSet<Order> Orders { get; set; }
         public DbSet<Customer> Customers{ get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserSecurity> Users_Security { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
