@@ -9,7 +9,7 @@ namespace Application.Authentication
 {
     public class UserSecurity
     {
-        private int _id;
+        public int Id { get; set; }
         public User User { get; set; }
         public string Password { get; set; }
     }

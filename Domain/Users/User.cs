@@ -8,7 +8,7 @@ namespace Domain.Users
 {
     public class User
     {
-        private int _id;
+        public int Id { get; set; }
 
         private string _name;
         public string Name
