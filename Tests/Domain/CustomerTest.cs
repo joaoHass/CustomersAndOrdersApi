@@ -5,7 +5,7 @@ namespace Tests.Domain
     public class CustomerTest
     {
         [Fact]
-        private void cpf_should_only_have_11_digits()
+        private void should_only_accept_cpf_with_11_digits()
         {
             Customer sut = new();
             string newCpf = "12345678901234";
@@ -17,7 +17,7 @@ namespace Tests.Domain
         }
 
         [Fact]
-        private void cpf_should_only_accept_digits()
+        private void should_only_accept_cpf_with_only_digits()
         {
             Customer sut = new();
             string newCpf = "123A3^|C!@_~ '";
