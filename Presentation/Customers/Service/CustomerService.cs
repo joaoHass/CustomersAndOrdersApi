@@ -54,6 +54,8 @@ namespace Presentation.Customers.Service
 
             if (customerToUpdate == null) throw new ArgumentNullException($"A customer with the id {id} does not exist");
 
+            _logger.LogInformation("Customer {customer} is being updated.", customerToUpdate);
+
             if (dto.Name != null)
                 customerToUpdate.Name = dto.Name;
 
