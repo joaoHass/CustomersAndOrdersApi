@@ -14,9 +14,10 @@ namespace Presentation
         private readonly ILogger<CustomerController> _logger;
         private readonly ICustomerService _service;
 
-        public CustomerController(ICustomerService service)
+        public CustomerController(ICustomerService service, ILogger<CustomerController> logger)
         {
             _service = service;
+            _logger = logger;
         }
 
         [Authorize]
