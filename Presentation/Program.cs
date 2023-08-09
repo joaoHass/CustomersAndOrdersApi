@@ -8,6 +8,8 @@ using System.Reflection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Serilog;
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -60,6 +62,18 @@ builder.Services.AddSwaggerGen(o =>
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     o.IncludeXmlComments(xmlPath);
+});
+
+builder.Host.UseSerilog((hostContext, configuration) =>
+{
+    configuration.WriteTo.PostgreSQL(
+        connectionString: builder.Configuration["ConnectionStrings:Production"],
+        tableName: "Logs",
+        restrictedToMinimumLevel:LogEventLevel.Information,
+        needAutoCreateTable: true,
+        respectCase: true,
+        useCopy: false
+        );
 });
 
 var app = builder.Build();
