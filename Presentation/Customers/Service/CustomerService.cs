@@ -8,10 +8,12 @@ namespace Presentation.Customers.Service
     public class CustomerService : ICustomerService
     {
         private readonly IRepository<Customer> _repository;
+        private readonly ILogger<CustomerService> _logger;
 
-        public CustomerService(IRepository<Customer> customerRepository)
+        public CustomerService(IRepository<Customer> customerRepository, ILogger<CustomerService> logger)
         {
             _repository = customerRepository;
+            _logger = logger;
         }
 
         public void Add(CustomerCreateDto entity)
