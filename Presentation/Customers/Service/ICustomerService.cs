@@ -14,8 +14,8 @@ namespace Presentation.Customers.Service
         /// <exception cref="ArgumentException">Thrown if any informed field in the DTO is invalid</exception>
         void Add(CustomerCreateDto entity);
         public void Delete(int id);
-        public Customer? Get(int id);
-        public ICollection<Customer> GetAll();
+        public Task<Customer?> Get(int id);
+        public Task<ICollection<Customer>> GetAll();
 
         /// <summary>
         /// </summary>

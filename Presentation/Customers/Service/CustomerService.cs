@@ -38,19 +38,19 @@ namespace Presentation.Customers.Service
             _repository.Delete(id);
         }
 
-        public Customer? Get(int id)
+        public async Task<Customer?> Get(int id)
         {
-            return _repository.Get(id);
+            return await _repository.Get(id);
         }
 
-        public ICollection<Customer> GetAll()
+        public async Task<ICollection<Customer>> GetAll()
         {
-            return _repository.GetAll();
+            return await _repository.GetAll();
         }
 
-        public void Update(int id, CustomerUpdateDto dto)
+        public async void Update(int id, CustomerUpdateDto dto)
         {
-            Customer? customerToUpdate = Get(id);
+            Customer? customerToUpdate = await Get(id);
 
             if (customerToUpdate == null) throw new ArgumentNullException($"A customer with the id {id} does not exist");
 

@@ -25,9 +25,9 @@ namespace Presentation
         [Route("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Customer))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetCustomerById(int id)
+        public async Task<IActionResult> GetCustomerById(int id)
         {
-            Customer? customer = _service.Get(id);
+            Customer? customer = await _service.Get(id);
 
             if (customer == null)
                 return NotFound($"The customer with Id {id} was not found.");
@@ -38,9 +38,9 @@ namespace Presentation
         [Authorize]
         [HttpGet]
         [Route("")]
-        public ActionResult<IEnumerable<Customer>> GetCustomers()
+        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
         {
-            return Ok(_service.GetAll());
+            return Ok(await _service.GetAll());
         }
 
         [Authorize]

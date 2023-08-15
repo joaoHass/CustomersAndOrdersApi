@@ -41,8 +41,8 @@ namespace Data
             _context.SaveChanges();
         }
 
-        public ICollection<Customer> GetAll() => _context.Customers.AsNoTracking().ToList();
+        public async Task<ICollection<Customer>> GetAll() => await _context.Customers.AsNoTracking().ToListAsync();
 
-        public Customer? Get(int id) => _context.Customers.Find(id);
+        public async Task<Customer?> Get(int id) => await _context.Customers.FindAsync(id);
     }
 }
